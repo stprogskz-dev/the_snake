@@ -48,10 +48,11 @@ def _the_snake(snake_import_test):
         raise AssertionError(
             'При импорте модуль `the_snake` произошла ошибка:\n'
             f'{type(error).__name__}: {error}'
-        )
+        ) from error
     for class_name in ('GameObject', 'Snake', 'Apple'):
         assert hasattr(the_snake, class_name), (
-            f'Убедитесь, что в модуле `the_snake` определен класс `{class_name}`.'
+            'Убедитесь, что в модуле `the_snake` определен класс '
+            f'`{class_name}`.'
         )
     return the_snake
 
@@ -83,7 +84,7 @@ def _create_game_object(class_name, module):
             '`self` передаются какие-то ещё параметры - убедитесь, что для '
             'них установлены значения по умолчанию. Например:\n'
             '`def __init__(self, <параметр>=<значение_по_умолчанию>):`'
-        )
+        ) from error
 
 
 @pytest.fixture
